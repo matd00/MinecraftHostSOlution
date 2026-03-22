@@ -19,13 +19,13 @@ public class GameServerService : IGameServerService
     public async Task<IEnumerable<GameServerDto>> GetAllAsync()
     {
         var servers = await _repository.GetAllAsync();
-        return servers.Select(s => new GameServerDto(s.Id, s.Name, s.Port, s.Status, s.CreatedAt));
+        return servers.Select(s => new GameServerDto(s.Id, s.Name, s.Port, s.Status, s.CreatedAt, s.LastAccessedAt));
     }
 
     public async Task<GameServerDto?> GetByIdAsync(Guid id)
     {
         var s = await _repository.GetByIdAsync(id);
-        return s == null ? null : new GameServerDto(s.Id, s.Name, s.Port, s.Status, s.CreatedAt);
+        return s == null ? null : new GameServerDto(s.Id, s.Name, s.Port, s.Status, s.CreatedAt, s.LastAccessedAt);
     }
 
     public async Task<GameServerDto> CreateAsync(CreateServerDto dto)
@@ -48,7 +48,7 @@ public class GameServerService : IGameServerService
         await _repository.AddAsync(server);
         await _dockerService.CreateContainerAsync(server.Name, server.Port);
 
-        return new GameServerDto(server.Id, server.Name, server.Port, server.Status, server.CreatedAt);
+        return new GameServerDto(server.Id, server.Name, server.Port, server.Status, server.CreatedAt, server.LastAccessedAt);
     }
 
     public async Task StartAsync(Guid id)

@@ -42,6 +42,10 @@ public class DockerService : IDockerService
             PortBindings = new Dictionary<string, IList<PortBinding>>
             {
                 { "25565/tcp", new List<PortBinding> { new PortBinding { HostPort = port.ToString() } } }
+            },
+            Mounts = new List<Mount>
+            {
+                new Mount { Type = "volume", Source = $"mc-data-{name}", Target = "/data" }
             }
         };
 

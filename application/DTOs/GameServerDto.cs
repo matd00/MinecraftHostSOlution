@@ -7,5 +7,6 @@ public record GameServerDto(
     string Name,
     int Port,
     ServerStatus Status,
-    DateTime CreatedAt
+    DateTime CreatedAt,
+    DateTime? LastAccessedAt
 );

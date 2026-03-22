@@ -9,6 +9,7 @@ public class GameServer
     public int Port { get; set; }
     public ServerStatus Status { get; set; } = ServerStatus.Stopped;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? LastAccessedAt { get; set; }
 
     public void Start()
     {
@@ -16,6 +17,7 @@ public class GameServer
             throw new InvalidOperationException("Server is already running.");
         
         Status = ServerStatus.Running;
+        LastAccessedAt = DateTime.UtcNow;
     }
 
     public void Stop()

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ServerHost.Application.Services;
 using ServerHost.Domain.Interfaces;
+using ServerHost.Infrastructure;
 using ServerHost.Infrastructure.Docker;
 using ServerHost.Infrastructure.Persistance;
 
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IGameServerRepository, GameServerRepository>();
 builder.Services.AddScoped<IGameServerService, GameServerService>();
 builder.Services.AddSingleton<IDockerService, DockerService>();
+builder.Services.AddHostedService<ServerMonitoringService>();
 
 // CORS
 builder.Services.AddCors(options =>
