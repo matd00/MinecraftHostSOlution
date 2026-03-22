@@ -1,0 +1,11 @@
+bin/
+obj/
+*.user
+*.suo
+*.sln.doccache
+.vs/
+.idea/
+node_modules/
+dist/
+build/
+*.db
